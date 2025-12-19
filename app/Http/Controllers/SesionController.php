@@ -7,11 +7,13 @@ use Illuminate\Http\Request;
 
 class SesionController extends Controller
 {
+
     public function index()
     {
-        $sesiones = Sesion::all();
+        $sesiones = Sesion::listarSesiones();
         return view('sesions.index', compact('sesiones'));
     }
+
 
     public function create()
     {
@@ -29,7 +31,7 @@ class SesionController extends Controller
             'estado'         => 'required|string'
         ]);
 
-        Sesion::create($request->all());
+        Sesion::crearSesion($request->all());
 
         return redirect()->route('sesions.index')
             ->with('success', 'Sesión registrada correctamente.');
@@ -51,7 +53,7 @@ class SesionController extends Controller
             'estado'         => 'required|string'
         ]);
 
-        $sesion->update($request->all());
+        $sesion->actualizarSesion($request->all());
 
         return redirect()->route('sesions.index')
             ->with('success', 'Sesión actualizada correctamente.');
@@ -59,7 +61,8 @@ class SesionController extends Controller
 
     public function destroy(Sesion $sesion)
     {
-        $sesion->delete();
+
+        $sesion->eliminarSesion();
 
         return redirect()->route('sesions.index')
             ->with('success', 'Sesión eliminada correctamente.');

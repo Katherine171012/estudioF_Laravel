@@ -16,4 +16,28 @@ class Sesion extends Model
         'fecha_hora',
         'estado'
     ];
+
+
+    public static function crearSesion(array $data)
+    {
+        return self::create($data);
+    }
+
+
+    public function actualizarSesion(array $data)
+    {
+        return $this->update($data);
+    }
+
+
+    public function eliminarSesion()
+    {
+        return $this->delete();
+    }
+
+    public static function listarSesiones()
+    {
+        return self::all();
+    }
+
 }
