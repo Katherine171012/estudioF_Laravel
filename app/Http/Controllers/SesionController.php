@@ -21,11 +21,12 @@ class SesionController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tipo_sesion'     => 'required',
-            'nombre_cliente'  => 'required',
-            'telefono'        => 'required',
-            'ubicacion'       => 'required',
-            'fecha_hora'      => 'required'
+            'tipo_sesion'    => 'required|string|max:50',
+            'nombre_cliente' => 'required|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/|max:100',
+            'telefono'       => 'required|numeric|digits_between:7,10',
+            'ubicacion'      => 'required|string|max:150',
+            'fecha_hora'     => 'required|date',
+            'estado'         => 'required|string'
         ]);
 
         Sesion::create($request->all());
@@ -42,11 +43,12 @@ class SesionController extends Controller
     public function update(Request $request, Sesion $sesion)
     {
         $request->validate([
-            'tipo_sesion'     => 'required',
-            'nombre_cliente'  => 'required',
-            'telefono'        => 'required',
-            'ubicacion'       => 'required',
-            'fecha_hora'      => 'required'
+            'tipo_sesion'    => 'required|string|max:50',
+            'nombre_cliente' => 'required|regex:/^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/|max:100',
+            'telefono'       => 'required|numeric|digits_between:7,10',
+            'ubicacion'      => 'required|string|max:150',
+            'fecha_hora'     => 'required|date',
+            'estado'         => 'required|string'
         ]);
 
         $sesion->update($request->all());
